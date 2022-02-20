@@ -60,6 +60,7 @@
 		201DA2D927B019A8009F5070 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				2049FA7127C2B5AD009288D7 /* Profile */,
 				201DA2DA27B019A8009F5070 /* AppDelegate.swift */,
 				201DA2DC27B019A8009F5070 /* SceneDelegate.swift */,
 				20B5FB8927BAAD5A004A947D /* TabBarController.swift */,
@@ -71,6 +72,13 @@
 				201DA2E827B019AA009F5070 /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		2049FA7127C2B5AD009288D7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
