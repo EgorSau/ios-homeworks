@@ -39,7 +39,7 @@ class TabBarController: UITabBarController {
             }
         }
 
-        var arrayVC: [UIViewController] = [FeedVC(), ProfileVC()]
+        var arrayVC: [UIViewController] = [FeedVC(), ProfileViewController()]
         
         arrayVC[0] = UINavigationController(rootViewController: FeedVC())
         
@@ -47,8 +47,8 @@ class TabBarController: UITabBarController {
             switch tabBarItem {
             case FeedVC():
                 return UINavigationController(rootViewController: FeedVC())
-            case ProfileVC():
-                return ProfileVC()
+            case ProfileViewController():
+                return ProfileViewController()
             default:
                 break
             }
