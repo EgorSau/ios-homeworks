@@ -42,6 +42,7 @@ class TabBarController: UITabBarController {
         var arrayVC: [UIViewController] = [FeedVC(), ProfileViewController()]
         
         arrayVC[0] = UINavigationController(rootViewController: FeedVC())
+        arrayVC[1] = UINavigationController(rootViewController: ProfileViewController())
         
         self.viewControllers = arrayVC.map({ tabBarItem in
             switch tabBarItem {
