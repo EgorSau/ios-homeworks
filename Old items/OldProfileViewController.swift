@@ -7,15 +7,15 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class OldProfileViewController: UIViewController {
     
    // @IBOutlet weak var targetLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let profileView = Bundle.main.loadNibNamed("ProfileView", owner: nil, options: nil)?.first as? UIView {
-            self.view.addSubview(profileView)
-        }
+//        if let profileView = Bundle.main.loadNibNamed("ProfileView", owner: nil, options: nil)?.first as? UIView {
+//            self.view.addSubview(profileView)
+//        }
     }
 }
