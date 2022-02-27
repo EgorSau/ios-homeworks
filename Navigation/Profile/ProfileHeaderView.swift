@@ -11,14 +11,35 @@ class ProfileHeaderView: UIView {
     
     private var buttonTopConstraint: NSLayoutConstraint?
     
+    private var statusText: String = ""
+    
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.layer.cornerRadius = 12
+        textField.backgroundColor = .white
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.font = .systemFont(ofSize: 15, weight: .regular)
+        textField.textColor = .black
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.addTarget(.none, action: #selector(statusTextChanged), for: .editingChanged)
+        return textField
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
+        label.text = "Cool cat"
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
+        label.text = "Waiting for something..."
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -52,7 +73,7 @@ class ProfileHeaderView: UIView {
         return stack
     }()
     
-    private lazy var statusButton: UIButton = {
+    lazy var statusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -79,12 +100,13 @@ class ProfileHeaderView: UIView {
         
         self.statusButton.backgroundColor = .systemBlue
         self.statusButton.layer.cornerRadius = 4
-        self.statusButton.setTitle("Show status", for: .normal)
+        self.statusButton.setTitle("Set status", for: .normal)
         self.statusButton.setTitleColor(.white, for: .normal)
         self.statusButton.layer.shadowOffset = .init(width: 4, height: 4)
         self.statusButton.layer.shadowRadius = 4
         self.statusButton.layer.shadowColor = UIColor.black.cgColor
         self.statusButton.layer.shadowOpacity = 0.7
+        self.statusButton.addTarget(.none, action: #selector(buttonPressed), for: .touchUpInside)
         
         self.buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999)
@@ -99,16 +121,17 @@ class ProfileHeaderView: UIView {
                                     ].compactMap({ $0 }) )
     }
     
-    private func setupNameLabel() {
-        self.nameLabel.text = "Cool cat"
-        self.nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        self.nameLabel.textColor = .black
+    @objc private func buttonPressed() {
+        let forPrinting = String(self.statusLabel.text!)
+        statusTextChanged(textField)
+        self.statusLabel.text = self.statusText
+        print(forPrinting)
     }
     
-    private func setupStatusLabel() {
-        self.statusLabel.text = "Waiting for something..."
-        self.statusLabel.textColor = .gray
-        self.statusLabel.font = .systemFont(ofSize: 14, weight: .regular)
+    @objc private func statusTextChanged(_ textField: UITextField) {
+        if let text = textField.text {
+            self.statusText = text
+        }
     }
     
     private func setupStackView() {
@@ -117,20 +140,17 @@ class ProfileHeaderView: UIView {
         self.stackView.addArrangedSubview(self.labelsStackView)
         self.labelsStackView.addArrangedSubview(self.nameLabel)
         self.labelsStackView.addArrangedSubview(self.statusLabel)
-        self.setupNameLabel()
-        self.setupStatusLabel()
-        
+        self.labelsStackView.addArrangedSubview(self.textField)
+
         let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let trailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         let imageViewAspectRatio = self.profileImageView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: 1.0)
-//        let imageViewAspectRatio2 = self.profileImageView.heightAnchor.constraint(equalTo: self.profileImageView.heightAnchor, multiplier: 1.0)
         
         NSLayoutConstraint.activate([topConstraint,
                                      leadingConstraint,
                                      trailingConstraint,
                                      imageViewAspectRatio,
-//                                     imageViewAspectRatio2
                                     ])
     }
 }
