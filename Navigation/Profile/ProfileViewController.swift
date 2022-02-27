@@ -10,20 +10,19 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var headerView: ProfileHeaderView = {
-        let view = ProfileHeaderView(frame: .zero)
+        let view = ProfileHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-//    private var heightConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupSubView()
     }
+    
     override dynamic func viewWillLayoutSubviews() {
-//        headerView.backgroundColor = .systemPink
+        super.viewWillLayoutSubviews()
         self.headerView.frame = self.view.frame
     }
     
@@ -45,6 +44,6 @@ class ProfileViewController: UIViewController {
                                      leadingConstraint,
                                      trailingConstraint,
                                      heightConstraint
-                                    ])
+                                    ].compactMap({ $0 }) )
     }
 }
