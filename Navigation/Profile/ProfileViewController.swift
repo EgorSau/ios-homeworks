@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController {
     private func setupView(){
         self.view.backgroundColor = .white
         self.navigationItem.title = "Profile"
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     private func setupSubView(){
