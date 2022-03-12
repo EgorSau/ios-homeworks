@@ -98,7 +98,7 @@ class ProfileHeaderView: UIView {
         self.backgroundColor = .lightGray
         self.setupStackView()
         self.setupStatusButton()
-        self.setupNextMenuButton()
+//        self.setupNextMenuButton()
     }
     
     private func setupStatusButton() {
