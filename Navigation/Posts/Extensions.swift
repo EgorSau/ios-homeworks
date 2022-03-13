@@ -13,24 +13,12 @@ protocol Setupable {
     func setup(with viewModel: ViewModelProtocol)
 }
 
-//protocol Delegate: AnyObject {}
-
 extension ProfileTableHeaderView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let view = ProfileTableHeaderView()
         let count = view.dataSource.count
-//        print(count)
         return count
-//        return 4
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        <#code#>
-//    }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
@@ -61,5 +49,3 @@ extension PostTableViewCell: Setupable {
         self.viewsLabel.text = "Views: \(viewModel.views)"
     }
 }
-
-//extension Post: Delegate {}

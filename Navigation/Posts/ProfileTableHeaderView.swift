@@ -23,8 +23,6 @@ class ProfileTableHeaderView: UIView {
     
     var dataSource: [Post.PostModel] = []
     
-//    weak var delegate: Delegate?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
@@ -37,14 +35,11 @@ class ProfileTableHeaderView: UIView {
     
     private func drawSelf() {
         self.setupTableView()
-//        self.tableView.reloadData()
     }
     
     func loadDataToDataSource(fromModel: Post){
         fromModel.addPostsIntoArray()
-//        print("PostArray: \(fromModel.postArray)")
         self.dataSource = fromModel.postArray
-//        print("DataSource: \(self.dataSource)")
     }
     
     private func setupTableView() {

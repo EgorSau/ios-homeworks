@@ -35,7 +35,6 @@ class PostTableViewCell: UITableViewCell {
     private lazy var likesStack: UIStackView = {
         let likesStack = UIStackView()
         likesStack.axis = .horizontal
-//        likesStack.alignment = .center
         likesStack.translatesAutoresizingMaskIntoConstraints = false
         return likesStack
     }()
@@ -80,8 +79,6 @@ class PostTableViewCell: UITableViewCell {
         let postImage = UIImageView()
         postImage.contentMode = .scaleAspectFit
         postImage.backgroundColor = .black
-//        postImage.clipsToBounds = true
-//        postImage.layer.masksToBounds = true
         postImage.translatesAutoresizingMaskIntoConstraints = false
         return postImage
     }()
@@ -121,63 +118,33 @@ class PostTableViewCell: UITableViewCell {
         self.likesStack.addArrangedSubview(likesLabel)
         self.likesStack.addArrangedSubview(viewsLabel)
         
-//        let topPostImageConstraint = self.postStack.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor)
+        // констрейнт картинки
         let heightPostImageConstraint = self.postImage.heightAnchor.constraint(equalToConstant: 400)
-//        let heightPostImageConstraint = self.postImage.heightAnchor.constraint(equalTo: self.postStack.heightAnchor, multiplier: 1.0)
-//        let widthPostImageConstraint = self.postStack.widthAnchor.constraint(equalTo: self.postStack.widthAnchor)
-//        let leadingPostImageConstraint = self.postStack.leadingAnchor.constraint(equalTo: self.postStack.leadingAnchor)
-//        let trailingPostImageConstraint = self.postStack.trailingAnchor.constraint(equalTo: self.postStack.trailingAnchor)
-//        let bottomPostImageConstraint = self.postStack.bottomAnchor.constraint(equalTo: self.postLabel.topAnchor)
         
+        // констрейнт тайтл-лейбла
+        let leadingTitleLabelConstraint = self.titleLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
+        
+        // констрейнт пост-лейбла
+        let leadingPostLabelConstraint = self.postLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
+        
+        // констрейнт картинки
+        let leadingImageConstraint = self.postImage.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
+        
+        // констрейнт лайк-стека
+        let bottomLikeStackConstraint = self.likesStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
+
+        // констрейнт стэка
         let topPostStackConstraint = self.postStack.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 16)
-        let leadingPostStackConstraint = self.postStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
         let trailingPostStackConstraint = self.postStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
-        let bottomPostStackConstraint = self.postStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
-//
-//        let topLikesStackConstraint = self.likesStack.topAnchor.constraint(equalTo: self.postStack.topAnchor)
-//        let leadingLikesStackConstraint = self.likesStack.leadingAnchor.constraint(equalTo: self.postStack.leadingAnchor)
-//        let trailingLikesStackConstraint = self.likesStack.trailingAnchor.constraint(equalTo: self.postStack.trailingAnchor)
-//        let bottomLikesStackConstraint = self.likesStack.bottomAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16)
-//
+
         NSLayoutConstraint.activate([
                                     topPostStackConstraint,
-                                    leadingPostStackConstraint,
                                     trailingPostStackConstraint,
-                                    bottomPostStackConstraint,
-//                                     topLikesStackConstraint,
-//                                     leadingLikesStackConstraint,
-//                                     trailingLikesStackConstraint,
-//                                     bottomLikesStackConstraint,
                                     heightPostImageConstraint,
-//                                    widthPostImageConstraint,
-//                                    leadingPostImageConstraint,
-//                                    trailingPostImageConstraint,
-//                                    topPostImageConstraint,
-//                                    bottomPostImageConstraint
+                                    leadingTitleLabelConstraint,
+                                    leadingPostLabelConstraint,
+                                    leadingImageConstraint,
+                                    bottomLikeStackConstraint
                                     ])
-        
-//        let postLabelLeadingConstraint = self.postLabel.leadingAnchor.constraint(equalTo: self.postStack.leadingAnchor, constant: 16)
-        
     }
-    
-//    private func setupLikesStack(){
-//        self.postStack.addArrangedSubview(likesStack)
-//        self.likesStack.addArrangedSubview(likesLabel)
-//        self.likesStack.addArrangedSubview(viewsLabel)
-//        
-//        let topConstraint = self.likesStack.topAnchor.constraint(equalTo: self.backView.topAnchor)
-//        let leadingConstraint = self.likesStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
-//        let trailingConstraint = self.likesStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
-//        let bottomConstraint = self.likesStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
-//        
-//        NSLayoutConstraint.activate([topConstraint,
-//                                     leadingConstraint,
-//                                     trailingConstraint,
-//                                     bottomConstraint
-//                                    ])
-//    }
 }
-
-
-//  между заголовком и картинкой 12пт
-// после лайков 16пт
