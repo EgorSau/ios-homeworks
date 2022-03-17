@@ -49,3 +49,21 @@ extension PostTableViewCell: Setupable {
         self.viewsLabel.text = "Views: \(viewModel.views)"
     }
 }
+
+extension PhotoTableHeaderView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as? PhotosTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
+        cell.changeToString()
+        cell.uploadImages()
+        print(cell.imgArray)
+        return cell
+    }
+}
