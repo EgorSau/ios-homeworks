@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var photoView: PhotoTableHeaderView = {
         let photoView = PhotoTableHeaderView()
-        photoView.translatesAutoresizingMaskIntoConstraints = false
+        photoView.view.translatesAutoresizingMaskIntoConstraints = false
         return photoView
     }()
     
@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupSubView()
+        self.barButtonSetup()
     }
     
     private func setupView(){
@@ -39,10 +40,22 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    private func barButtonSetup() {
+        let image = UIImage(systemName: "arrow.right")
+        let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(goToPhotoCollection))
+        navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func goToPhotoCollection(){
+        let photosVC = PhotosViewController()
+        navigationController?.pushViewController(photosVC, animated: true)
+        print("работает")
+    }
+    
     private func setupSubView(){
         
         self.view.addSubview(self.headerView)
-        self.view.addSubview(self.photoView)
+        self.view.addSubview(self.photoView.view)
         self.view.addSubview(self.tableView)
         
         //настройка профиля
@@ -52,14 +65,14 @@ class ProfileViewController: UIViewController {
         let heightConstraint = self.headerView.heightAnchor.constraint(equalToConstant: 290)
         
         //настройка фото
-        let topPhotoConstraint = self.photoView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
-        let leadingPhotoConstraint = self.photoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let trailingPhotoConstraint = self.photoView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        let topPhotoConstraint = self.photoView.view.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
+        let leadingPhotoConstraint = self.photoView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingPhotoConstraint = self.photoView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
 //        let bottomPhotoConstraint = self.photoView.bottomAnchor.constraint(equalTo: self.tableView.topAnchor)
-        let heightPhotoConstraint = self.photoView.heightAnchor.constraint(equalToConstant: 150)
+        let heightPhotoConstraint = self.photoView.view.heightAnchor.constraint(equalToConstant: 150)
         
         //настройка таблицы
-        let topTableConstraint = self.tableView.topAnchor.constraint(equalTo: self.photoView.bottomAnchor)
+        let topTableConstraint = self.tableView.topAnchor.constraint(equalTo: self.photoView.view.bottomAnchor)
         let leadingTableConstraint = self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let trailingTableConstraint = self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottomTableConstraint = self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)

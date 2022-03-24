@@ -15,7 +15,7 @@ class PhotosTableViewCell: UITableViewCell {
     let numberArray = [1...20]
     var imgArray = [String]()
     
-    private lazy var backView: UIView = {
+    lazy var backView: UIView = {
        let backView = UIView()
         backView.clipsToBounds = true
         backView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,9 +65,18 @@ class PhotosTableViewCell: UITableViewCell {
         return arrowImage
     }()
     
+//    lazy var arrowButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(self.arrowImage.image, for: .normal)
+//        button.tintColor = .black
+//        button.addTarget(self, action: #selector(self.goToPhotoCollection), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
     lazy var photoImage1: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFit //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -77,7 +86,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage2: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFit //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -87,7 +96,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage3: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFit //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -97,7 +106,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage4: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFit //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -120,6 +129,15 @@ class PhotosTableViewCell: UITableViewCell {
         }
     }
     
+    func pushVC(){
+//        let gallery = PhotosViewController()
+//        UINavigationController().pushViewController(gallery, animated: true)
+        let profile = ProfileViewController()
+        let gallery = PhotosViewController()
+        profile.navigationController?.pushViewController(gallery, animated: true)
+        print("cell")
+    }
+    
     func uploadImages(){
         self.photoImage1.image = UIImage(named: self.imgArray[0])
         self.photoImage2.image = UIImage(named: self.imgArray[1])
@@ -133,7 +151,8 @@ class PhotosTableViewCell: UITableViewCell {
         self.mainStack.addArrangedSubview(firstLineStack)
         self.mainStack.addArrangedSubview(photoStack)
         self.firstLineStack.addArrangedSubview(titleLabel)
-        self.firstLineStack.addArrangedSubview(arrowImage)
+//        self.firstLineStack.addArrangedSubview(arrowButton) // button
+        self.firstLineStack.addArrangedSubview(arrowImage) // image
         self.photoStack.addArrangedSubview(photoImage1)
         self.photoStack.addArrangedSubview(photoImage2)
         self.photoStack.addArrangedSubview(photoImage3)
@@ -149,13 +168,15 @@ class PhotosTableViewCell: UITableViewCell {
         let topConstraint = self.mainStack.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 12)
         let leadingConstraint = self.mainStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 12)
         let trailingConstraint = self.mainStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -12)
-        let bottomConstraint = self.mainStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: 12)
+        let bottomConstraint = self.mainStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
+        //, constant: 12)
         
         //title
         let bottomTitleConstraint = self.titleLabel.bottomAnchor.constraint(equalTo: photoStack.topAnchor, constant: -12)
         
         //arrow
-        let centerY = self.arrowImage.centerYAnchor.constraint(equalTo: self.arrowImage.centerYAnchor)
+//        let centerY = self.arrowButton.centerYAnchor.constraint(equalTo: self.arrowButton.centerYAnchor) //button
+        let centerY = self.arrowImage.centerYAnchor.constraint(equalTo: self.arrowImage.centerYAnchor) //image
         
         //images
         let image1ViewAspectRatio = self.photoImage1.heightAnchor.constraint(equalTo: self.photoImage1.widthAnchor, multiplier: 1.0)
