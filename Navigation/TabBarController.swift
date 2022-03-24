@@ -32,22 +32,22 @@ class TabBarController: UITabBarController {
                 case .none:
                     return ""
                 case .first:
-                    return "list.bullet.circle.fill"
+                    return "house.circle"
                 case .second:
                     return "person.circle"
                 }
             }
         }
 
-        var arrayVC: [UIViewController] = [FeedVC(), ProfileViewController()]
+        var arrayVC: [UIViewController] = [FeedViewController(), ProfileViewController()]
         
-        arrayVC[0] = UINavigationController(rootViewController: FeedVC())
+        arrayVC[0] = UINavigationController(rootViewController: FeedViewController())
         arrayVC[1] = UINavigationController(rootViewController: ProfileViewController())
         
         self.viewControllers = arrayVC.map({ tabBarItem in
             switch tabBarItem {
-            case FeedVC():
-                return UINavigationController(rootViewController: FeedVC())
+            case FeedViewController():
+                return UINavigationController(rootViewController: FeedViewController())
             case ProfileViewController():
                 return ProfileViewController()
             default:

@@ -21,11 +21,6 @@ class ProfileViewController: UIViewController {
         self.setupSubView()
     }
     
-    override dynamic func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.headerView.frame = self.view.frame
-    }
-    
     private func setupView(){
         self.view.backgroundColor = .white
         self.navigationItem.title = "Profile"
@@ -36,10 +31,12 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(self.headerView)
         
         let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+
         let leadingConstraint = self.headerView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor)
         let trailingConstraint = self.headerView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
 //        let heightConstraint = self.headerView.heightAnchor.constraint(equalToConstant: 730)
         let bottomConstraint = self.headerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+
         
         NSLayoutConstraint.activate([topConstraint,
                                      leadingConstraint,
