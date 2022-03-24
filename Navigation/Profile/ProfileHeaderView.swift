@@ -60,7 +60,7 @@ class ProfileHeaderView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 16
-        stack.distribution = .fillEqually
+        stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -119,10 +119,12 @@ class ProfileHeaderView: UIView {
         self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999)
         let leadingConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor)
         let trailingConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor)
+        let bottomConstraint = self.statusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
         let heightConstraint = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
         
         NSLayoutConstraint.activate([leadingConstraint,
                                      trailingConstraint,
+                                     bottomConstraint,
                                      heightConstraint,
                                      self.buttonTopConstraint
                                     ].compactMap({ $0 }) )
@@ -177,12 +179,14 @@ class ProfileHeaderView: UIView {
         let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let trailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        let heightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: 200)
         let imageViewAspectRatio = self.profileImageView.heightAnchor.constraint(equalTo: self.profileImageView.widthAnchor, multiplier: 1.0)
         
         NSLayoutConstraint.activate([topConstraint,
                                      leadingConstraint,
                                      trailingConstraint,
                                      imageViewAspectRatio,
+                                     heightConstraint
                                     ])
     }
 }

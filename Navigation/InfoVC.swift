@@ -16,7 +16,7 @@ class InfoVC: UIViewController {
     }
     
     private func buttonSetup(){
-        let postButton = UIButton(frame: CGRect(x: 30, y: 770, width: 370, height: 50))
+        let postButton = UIButton(frame: CGRect(x: 30, y: 150, width: 370, height: 50))
         postButton.backgroundColor = .systemBlue
         postButton.layer.cornerRadius = 12
         postButton.setTitleColor(.white, for: .normal)
