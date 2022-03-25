@@ -17,6 +17,7 @@
 		2092EA7727B5AF73000CE37D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2092EA7627B5AF73000CE37D /* FeedViewController.swift */; };
 		2092EA7927B5AF97000CE37D /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2092EA7827B5AF97000CE37D /* ProfileVC.swift */; };
 		20940A4827CD38220021AE05 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20940A4727CD38220021AE05 /* FeedView.swift */; };
+		20940A4B27CD466D0021AE05 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20940A4A27CD466D0021AE05 /* LogInViewController.swift */; };
 		20B5FB8A27BAAD5A004A947D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B5FB8927BAAD5A004A947D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		2092EA7627B5AF73000CE37D /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		2092EA7827B5AF97000CE37D /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		20940A4727CD38220021AE05 /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		20940A4A27CD466D0021AE05 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		20B5FB8927BAAD5A004A947D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 			children = (
 				2049FA7227C2B61D009288D7 /* ProfileHeaderView.swift */,
 				2049FA7427C2B655009288D7 /* ProfileViewController.swift */,
+				20940A4A27CD466D0021AE05 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			files = (
 				20940A4827CD38220021AE05 /* FeedView.swift in Sources */,
 				2092EA7927B5AF97000CE37D /* ProfileVC.swift in Sources */,
+				20940A4B27CD466D0021AE05 /* LogInViewController.swift in Sources */,
 				2092EA7727B5AF73000CE37D /* FeedViewController.swift in Sources */,
 				201DA2DF27B019A8009F5070 /* PostVC.swift in Sources */,
 				20B5FB8A27BAAD5A004A947D /* TabBarController.swift in Sources */,

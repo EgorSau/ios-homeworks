@@ -22,9 +22,9 @@ class TabBarController: UITabBarController {
                 case .none:
                     return nil
                 case .first:
-                    return "Лента пользователя"
+                    return "Feed"
                 case .second:
-                    return "Профиль"
+                    return "Profile"
                 }
             }
             var image: String {
@@ -32,24 +32,24 @@ class TabBarController: UITabBarController {
                 case .none:
                     return ""
                 case .first:
-                    return "house.circle"
+                    return "house.fill"
                 case .second:
-                    return "person.circle"
+                    return "person.fill"
                 }
             }
         }
 
-        var arrayVC: [UIViewController] = [FeedViewController(), ProfileViewController()]
+        var arrayVC: [UIViewController] = [FeedViewController(), LogInViewController()]
         
         arrayVC[0] = UINavigationController(rootViewController: FeedViewController())
-        arrayVC[1] = UINavigationController(rootViewController: ProfileViewController())
+        arrayVC[1] = UINavigationController(rootViewController: LogInViewController())
         
         self.viewControllers = arrayVC.map({ tabBarItem in
             switch tabBarItem {
             case FeedViewController():
                 return UINavigationController(rootViewController: FeedViewController())
-            case ProfileViewController():
-                return ProfileViewController()
+            case LogInViewController():
+                return LogInViewController()
             default:
                 break
             }
