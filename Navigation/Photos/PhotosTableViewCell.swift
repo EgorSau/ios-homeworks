@@ -129,15 +129,6 @@ class PhotosTableViewCell: UITableViewCell {
         }
     }
     
-    func pushVC(){
-//        let gallery = PhotosViewController()
-//        UINavigationController().pushViewController(gallery, animated: true)
-        let profile = ProfileViewController()
-        let gallery = PhotosViewController()
-        profile.navigationController?.pushViewController(gallery, animated: true)
-        print("cell")
-    }
-    
     func uploadImages(){
         self.photoImage1.image = UIImage(named: self.imgArray[0])
         self.photoImage2.image = UIImage(named: self.imgArray[1])

@@ -67,10 +67,7 @@ extension PhotoTableHeaderView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        ProfileViewController().goToPhotoCollection()
-        self.goToGallery()
-//        let gallery = PhotosViewController()
-//        self.navigation.pushViewController(gallery, animated: true)
+        self.delegate?.goToPhotoGallery()
     }
 }
 
@@ -95,12 +92,11 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let collection = PhotosCollectionViewCell()
         return collection.itemSize(for: collectionView.frame.width, with: spacing ?? 0)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotosCollectionViewCell else { return }
-//        let photoVC = PhotosViewController()
-//        let profileVC = ProfileViewController()
-//        profileVC.navigationController?.pushViewController(photoVC, animated: true)
-//        print(cell)
-//    }
+}
+
+extension ProfileViewController: ViewControllerPushDelegateProtocol {
+    func goToPhotoGallery() {
+        let photosVC = PhotosViewController()
+        navigationController?.pushViewController(photosVC, animated: true)
+    }
 }

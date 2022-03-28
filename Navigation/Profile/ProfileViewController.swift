@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var photoView: PhotoTableHeaderView = {
         let photoView = PhotoTableHeaderView()
+        photoView.delegate = self
         photoView.view.translatesAutoresizingMaskIntoConstraints = false
         return photoView
     }()
@@ -31,25 +32,12 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupSubView()
-        self.barButtonSetup()
     }
     
     private func setupView(){
         self.view.backgroundColor = .white
         self.navigationItem.title = "Profile"
         self.navigationController?.navigationBar.isHidden = false
-    }
-    
-    private func barButtonSetup() {
-        let image = UIImage(systemName: "arrow.right")
-        let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(goToPhotoCollection))
-        navigationItem.rightBarButtonItem = barButton
-    }
-    
-    @objc func goToPhotoCollection(){
-        let photosVC = PhotosViewController()
-        navigationController?.pushViewController(photosVC, animated: true)
-        print("работает")
     }
     
     private func setupSubView(){

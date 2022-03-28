@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol ViewControllerPushDelegateProtocol: AnyObject {
+    func goToPhotoGallery()
+}
+
 class PhotoTableHeaderView: UIViewController{
+    
+    weak var delegate: ViewControllerPushDelegateProtocol?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -42,13 +48,6 @@ class PhotoTableHeaderView: UIViewController{
     
     private func drawSelf() {
         self.setupTableView()
-    }
-    
-    @objc func goToGallery(){
-        let gallery = PhotosViewController()
-        self.navigation.pushViewController(gallery, animated: true)
-//        navigationController?.pushViewController(gallery, animated: true)
-        print("работает?")
     }
     
     private func setupTableView() {
