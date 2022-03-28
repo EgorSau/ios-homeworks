@@ -7,11 +7,20 @@
 
 import UIKit
 
+protocol ProfileViewDelegateProtocol: AnyObject {
+    func tableHeightUpdate(newHeight: CGFloat)
+}
+
 class ProfileHeaderView: UIView {
     
     private var buttonTopConstraint: NSLayoutConstraint?
+    private var stackHeightConstraint: NSLayoutConstraint?
     
-    private var statusText: String = ""
+    private var statusText: String = "Waiting for something..."
+    
+    var height: CGFloat = 270
+    
+    weak var viewDelegate: ProfileViewDelegateProtocol?
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
@@ -37,7 +46,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Waiting for something..."
+        label.text = self.statusText
         label.textColor = .gray
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +57,7 @@ class ProfileHeaderView: UIView {
         var profile = UIImageView()
         let catImage = UIImage(named: "coolCat.jpg")
         profile.image = catImage
-        profile.layer.cornerRadius = 95
+//        profile.layer.cornerRadius = 85
         profile.layer.borderWidth = 3
         profile.layer.borderColor = UIColor.white.cgColor
         profile.layer.masksToBounds = true
@@ -56,7 +65,7 @@ class ProfileHeaderView: UIView {
         return profile
     }()
     
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 16
@@ -94,6 +103,10 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        self.profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+    }
+    
     private func drawSelf() {
         self.backgroundColor = .lightGray
         self.setupStackView()
@@ -120,11 +133,13 @@ class ProfileHeaderView: UIView {
         let leadingConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor)
         let trailingConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor)
         let heightConstraint = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
+        self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: 170)
         
         NSLayoutConstraint.activate([leadingConstraint,
                                      trailingConstraint,
                                      heightConstraint,
-                                     self.buttonTopConstraint
+                                     self.buttonTopConstraint,
+                                     self.stackHeightConstraint
                                     ].compactMap({ $0 }) )
     }
     
@@ -154,16 +169,58 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func buttonPressed() {
+        self.statusTextChanged(textField)
+        self.profileViewUpdate(stackHeight: self.height, { [weak self] in
+            if self?.height == 270 {
+                self?.height = 190
+                guard let height = self?.height else {return}
+                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
+            } else {
+                self?.height = 270
+                guard let height = self?.height else {return}
+                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
+            }
+        })
+        layoutSubviews()
+
+//        self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
+
         let forPrinting = String(self.statusLabel.text!)
-        statusTextChanged(textField)
         self.statusLabel.text = self.statusText
         print(forPrinting)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
-        if let text = textField.text {
+        if textField.text == "" {
+            self.statusText = "Waiting for something..."
+            if var text = statusLabel.text {
+                var _ = text
+                text = self.statusText
+            }
+        } else if let text = textField.text {
             self.statusText = text
         }
+    }
+    
+    private func profileViewUpdate(stackHeight: CGFloat, _ completion: @escaping () -> Void){
+        var constraint: CGFloat = 0
+        if stackHeight == 270 {
+            constraint = 100
+        } else if stackHeight == 190 {
+            constraint = 170
+        }
+        self.stackHeightConstraint?.isActive = false
+        self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: constraint)
+        NSLayoutConstraint.activate([
+            self.stackHeightConstraint
+        ].compactMap({ $0 }) )
+        self.stackView.distribution = .fillProportionally
+        UIView.animate(withDuration: 0.3, delay: 0.0) {
+            self.layoutIfNeeded()
+        } completion: { _ in
+            completion()
+        }
+
     }
     
     private func setupStackView() {

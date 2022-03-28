@@ -9,7 +9,9 @@ import UIKit
 
 class ProfileTableHeaderView: UIView {
     
-    private lazy var tableView: UITableView = {
+    var height: CGFloat = 270
+    
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -57,5 +59,17 @@ class ProfileTableHeaderView: UIView {
                                      bottomConstraint
                                     ])
         
+    }
+}
+
+extension ProfileTableHeaderView: ProfileViewDelegateProtocol {
+    
+    func tableHeightUpdate(newHeight: CGFloat) {
+        self.tableView.beginUpdates()
+        self.height = newHeight
+        self.tableView.endUpdates()
+        UIView.animate(withDuration: 0.3, delay: 0.0) {
+            self.layoutIfNeeded()
+        }
     }
 }

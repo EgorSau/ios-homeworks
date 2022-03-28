@@ -117,34 +117,36 @@ class PostTableViewCell: UITableViewCell {
         self.postStack.addArrangedSubview(likesStack)
         self.likesStack.addArrangedSubview(likesLabel)
         self.likesStack.addArrangedSubview(viewsLabel)
-        
-        // констрейнт картинки
-        let heightPostImageConstraint = self.postImage.heightAnchor.constraint(equalToConstant: 400)
+       
+        // констрейнт стэка
+        let topPostStackConstraint = self.postStack.topAnchor.constraint(equalTo: self.backView.topAnchor)
         
         // констрейнт тайтл-лейбла
         let leadingTitleLabelConstraint = self.titleLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
         
+        // констрейнт картинки
+        let heightPostImageConstraint = self.postImage.heightAnchor.constraint(equalToConstant: 400)
+        let leadingImageConstraint = self.postImage.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
+        let trailingImageConstraint = self.postImage.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
+        
         // констрейнт пост-лейбла
         let leadingPostLabelConstraint = self.postLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
-        
-        // констрейнт картинки
-        let leadingImageConstraint = self.postImage.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
-        
+        let trailingPostLabelConstraint = self.postLabel.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
+
         // констрейнт лайк-стека
         let bottomLikeStackConstraint = self.likesStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
-
-        // констрейнт стэка
-        let topPostStackConstraint = self.postStack.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 16)
-        let trailingPostStackConstraint = self.postStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
-
+        let trailingLikeStackConstraint = self.likesStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
+ 
         NSLayoutConstraint.activate([
                                     topPostStackConstraint,
-                                    trailingPostStackConstraint,
                                     heightPostImageConstraint,
+                                    trailingImageConstraint,
+                                    leadingImageConstraint,
                                     leadingTitleLabelConstraint,
                                     leadingPostLabelConstraint,
-                                    leadingImageConstraint,
-                                    bottomLikeStackConstraint
+                                    trailingPostLabelConstraint,
+                                    bottomLikeStackConstraint,
+                                    trailingLikeStackConstraint
                                     ])
     }
 }

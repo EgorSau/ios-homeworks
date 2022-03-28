@@ -35,6 +35,16 @@ extension ProfileTableHeaderView: UITableViewDelegate, UITableViewDataSource {
         cell.setup(with: viewModel)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.height
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let profileView = ProfileHeaderView()
+        profileView.viewDelegate = self
+        return profileView
+    }
 }
 
 extension PostTableViewCell: Setupable {
