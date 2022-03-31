@@ -81,15 +81,15 @@ class FeedViewController: UIViewController {
     
     private func setupSecondButton() {
         
-        self.secondButton.backgroundColor = .systemBlue
+        self.secondButton.backgroundColor = .systemRed
         self.secondButton.layer.cornerRadius = 4
-        self.secondButton.setTitle("#2 Go to Profile", for: .normal)
+        self.secondButton.setTitle("#2 Go to gesture view", for: .normal)
         self.secondButton.setTitleColor(.white, for: .normal)
         self.secondButton.layer.shadowOffset = .init(width: 4, height: 4)
         self.secondButton.layer.shadowRadius = 4
         self.secondButton.layer.shadowColor = UIColor.black.cgColor
         self.secondButton.layer.shadowOpacity = 0.7
-        self.secondButton.addTarget(self, action: #selector(moveToPostView), for: .touchUpInside)
+        self.secondButton.addTarget(self, action: #selector(moveToGestureView), for: .touchUpInside)
     }
     
     
@@ -97,6 +97,11 @@ class FeedViewController: UIViewController {
         let postVC = PostVC()
         navigationController?.pushViewController(postVC, animated: true)
         postVC.postVCTitle = self.postObject.title
+    }
+    
+    @objc private func moveToGestureView () {
+        let gestureView = GestureViewController()
+        navigationController?.pushViewController(gestureView, animated: true)
     }
 
     
@@ -108,7 +113,7 @@ class FeedViewController: UIViewController {
     
     private func setupSubView(){
         
-        self.feedView.backgroundColor = .orange
+        self.feedView.backgroundColor = .lightGray
         self.view.addSubview(self.feedView)
         
         let topConstraint = self.feedView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
