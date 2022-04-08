@@ -9,6 +9,8 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    let likesLabelTapGestureRecognizer = UITapGestureRecognizer()
+    
     struct ViewModel: ViewModelProtocol {
         let author: String
         let description: String
@@ -16,6 +18,8 @@ class PostTableViewCell: UITableViewCell {
         var likes: Int
         var views: Int
     }
+    
+    var tapCount: Int = 0
     
     private lazy var backView: UIView = {
        let backView = UIView()
@@ -62,6 +66,7 @@ class PostTableViewCell: UITableViewCell {
         likesLabel.font = .systemFont(ofSize: 16, weight: .regular)
         likesLabel.textColor = .black
         likesLabel.textAlignment = .left
+        likesLabel.isUserInteractionEnabled = true
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         return likesLabel
     }()
@@ -87,6 +92,7 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
         self.setupStack()
+        self.setupGesture()
     }
     
     required init?(coder: NSCoder) {

@@ -35,6 +35,12 @@ extension ProfileTableHeaderView: UITableViewDelegate, UITableViewDataSource {
         cell.setup(with: viewModel)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {return}
+        cell.setupGesture()
+        print(indexPath)
+    }
 }
 
 extension PostTableViewCell: Setupable {
@@ -98,5 +104,35 @@ extension ProfileViewController: ViewControllerPushDelegateProtocol {
     func goToPhotoGallery() {
         let photosVC = PhotosViewController()
         navigationController?.pushViewController(photosVC, animated: true)
+    }
+}
+
+extension PostTableViewCell {
+    
+    func setupGesture() {
+        self.likesLabel.addGestureRecognizer(self.likesLabelTapGestureRecognizer)
+        self.likesLabelTapGestureRecognizer.addTarget(self, action: #selector(self.likesLabelHandleTapGesture))
+    }
+    
+    @objc private func likesLabelHandleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.likesLabelTapGestureRecognizer === gestureRecognizer else { return }
+        tapCount += gestureRecognizer.numberOfTouches
+        
+        var currentLikes: Int = 0
+
+        while currentLikes == 0 {
+            var tempText = self.likesLabel.text
+            let first = tempText?.popLast()?.wholeNumberValue
+            let second = tempText?.popLast()?.wholeNumberValue
+            let third = tempText?.popLast()?.wholeNumberValue
+            guard let first = first else {return}
+            guard let second = second else {return}
+            guard let third = third else {return}
+            currentLikes += first + second * 10 + third * 100
+        }
+    
+        let newLikes = currentLikes
+        let newText = "Likes: \(newLikes + gestureRecognizer.numberOfTouches)"
+        self.likesLabel.text = newText
     }
 }
