@@ -238,23 +238,23 @@ class LogInViewController: UIViewController {
     
     @objc private func buttonPressed(){
         //textFields empty?
-        guard self.emailPhoneTextField.text != "" || self.passTextField.text != "" else {
-            self.shake()
-            return
-        }
+//        guard self.emailPhoneTextField.text != "" || self.passTextField.text != "" else {
+//            self.shake()
+//            return
+//        }
 
         //passField correct?
-        guard self.passTextField.text?.count == 6 else {
-            self.shake()
-            self.warningAppear()
-            return
-        }
+//        guard self.passTextField.text?.count == 6 else {
+//            self.shake()
+//            self.warningAppear()
+//            return
+//        }
         
         //log & pass control
-        guard self.emailPhoneTextField.text == userLogin && self.passTextField.text == userPass else {
-            self.showAlert()
-            return
-        }
+//        guard self.emailPhoneTextField.text == userLogin && self.passTextField.text == userPass else {
+//            self.showAlert()
+//            return
+//        }
         
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)

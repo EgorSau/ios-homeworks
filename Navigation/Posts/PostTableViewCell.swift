@@ -19,7 +19,8 @@ class PostTableViewCell: UITableViewCell {
         var views: Int
     }
     
-    var tapCount: Int = 0
+    var views: Int = 0
+    var counter: Int = 0
     
     private lazy var backView: UIView = {
        let backView = UIView()
@@ -99,6 +100,12 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.viewsLabel.text = nil
+        self.likesLabel.text = nil
+    }
+    
     private func setupView(){
         
         self.contentView.addSubview(backView)
@@ -106,7 +113,7 @@ class PostTableViewCell: UITableViewCell {
         let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
         let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-        let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+        let bottomConstraint = self.backView.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor)
     
         NSLayoutConstraint.activate([topConstraint,
                                      leadingConstraint,

@@ -7,17 +7,24 @@
 
 import UIKit
 
+protocol PhotoDetailsProtocol: AnyObject {
+    func goToDetails()
+}
+
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     private enum Constants {
         static let itemCount: CGFloat = 3
     }
     
-    private lazy var photoImage: UIImageView = {
+    weak var delegate: PhotoDetailsProtocol?
+    
+    lazy var photoImage: UIImageView = {
         let photoImage = UIImageView()
         photoImage.translatesAutoresizingMaskIntoConstraints = false
         photoImage.contentMode = .scaleAspectFill
         photoImage.clipsToBounds = true
+        photoImage.isUserInteractionEnabled = true
         return photoImage
     }()
     
@@ -38,7 +45,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func uploadPhotos(for indexPath: IndexPath){
+    func uploadPhotos(for indexPath: IndexPath) -> [String]{
         // загрузка фото
         let model = PhotosTableViewCell()
         model.changeToString()
@@ -46,6 +53,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         let indexValue = Int(indexPath.row)
         let photoName = model.imgArray[indexValue]
         self.photoImage.image = UIImage(named: photoName)
+        return model.imgArray
     }
     
     func itemSize(for width: CGFloat, with spacing: CGFloat) -> CGSize {

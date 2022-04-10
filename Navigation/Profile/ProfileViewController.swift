@@ -9,16 +9,19 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    var myTimer: Timer!
+    
     private lazy var headerView: ProfileHeaderView = {
         let view = ProfileHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var tableView: ProfileTableHeaderView = {
-        let tableView = ProfileTableHeaderView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    lazy var postView: ProfileTableHeaderView = {
+        let postView = ProfileTableHeaderView()
+        postView.delegate = self
+        postView.translatesAutoresizingMaskIntoConstraints = false
+        return postView
     }()
     
     private lazy var photoView: PhotoTableHeaderView = {
@@ -32,6 +35,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupSubView()
+//        self.timerSetup()
     }
     
     private func setupView(){
@@ -40,11 +44,20 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    func timerSetup(){
+        self.myTimer = Timer(timeInterval: 5.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
+        RunLoop.main.add(self.myTimer, forMode: .default)
+    }
+    
+    @objc func refresh() {
+        self.postView.tableView.reloadData()
+    }
+    
     private func setupSubView(){
         
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.photoView.view)
-        self.view.addSubview(self.tableView)
+        self.view.addSubview(self.postView)
         
         //настройка профиля
         let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
@@ -60,10 +73,10 @@ class ProfileViewController: UIViewController {
         let heightPhotoConstraint = self.photoView.view.heightAnchor.constraint(equalToConstant: 150)
         
         //настройка таблицы
-        let topTableConstraint = self.tableView.topAnchor.constraint(equalTo: self.photoView.view.bottomAnchor)
-        let leadingTableConstraint = self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let trailingTableConstraint = self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let bottomTableConstraint = self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        let topTableConstraint = self.postView.topAnchor.constraint(equalTo: self.photoView.view.bottomAnchor)
+        let leadingTableConstraint = self.postView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingTableConstraint = self.postView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        let bottomTableConstraint = self.postView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         
         NSLayoutConstraint.activate([
                                     topConstraint,

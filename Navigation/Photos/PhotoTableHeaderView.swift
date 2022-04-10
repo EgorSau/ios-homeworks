@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ViewControllerPushDelegateProtocol: AnyObject {
+protocol GalleryPushDelegateProtocol: AnyObject {
     func goToPhotoGallery()
 }
 
 class PhotoTableHeaderView: UIViewController{
     
-    weak var delegate: ViewControllerPushDelegateProtocol?
+    weak var delegate: GalleryPushDelegateProtocol?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -27,10 +27,10 @@ class PhotoTableHeaderView: UIViewController{
         return tableView
     }()
     
-    var navigation: UINavigationController {
-        let navigation = UINavigationController(rootViewController: self)
-        return navigation
-    }
+//    var navigation: UINavigationController {
+//        let navigation = UINavigationController(rootViewController: self)
+//        return navigation
+//    }
     
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)

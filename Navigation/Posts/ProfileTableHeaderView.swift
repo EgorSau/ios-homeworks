@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol PostDetailsPushDelegateProtocol: AnyObject {
+    func goToPostDetails(index: IndexPath)
+}
+
 class ProfileTableHeaderView: UIView {
+    
+    weak var delegate: PostDetailsPushDelegateProtocol?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

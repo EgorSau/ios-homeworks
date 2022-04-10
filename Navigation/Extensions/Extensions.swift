@@ -33,13 +33,14 @@ extension ProfileTableHeaderView: UITableViewDelegate, UITableViewDataSource {
                                                     likes: post.likes,
                                                     views: post.views)
         cell.setup(with: viewModel)
+        cell.viewsUpdate(with: cell.views, forIndex: indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {return}
         cell.setupGesture()
-        print(indexPath)
+        self.delegate?.goToPostDetails(index: indexPath)
     }
 }
 
@@ -53,6 +54,8 @@ extension PostTableViewCell: Setupable {
         self.postLabel.text = viewModel.description
         self.likesLabel.text = "Likes: \(viewModel.likes)"
         self.viewsLabel.text = "Views: \(viewModel.views)"
+        
+        self.views = viewModel.views
     }
 }
 
@@ -89,7 +92,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         }
         cell.backgroundColor = .systemPink
-        cell.uploadPhotos(for: indexPath)
+        self.images = cell.uploadPhotos(for: indexPath)
         return cell
     }
     
@@ -98,12 +101,34 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let collection = PhotosCollectionViewCell()
         return collection.itemSize(for: collectionView.frame.width, with: spacing ?? 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? PhotosCollectionViewCell else {return}
+        self.imageZoom(to: cell.isSelected, forCell: indexPath)
+    }
 }
 
-extension ProfileViewController: ViewControllerPushDelegateProtocol {
+extension ProfileViewController: GalleryPushDelegateProtocol {
     func goToPhotoGallery() {
         let photosVC = PhotosViewController()
         navigationController?.pushViewController(photosVC, animated: true)
+    }
+}
+
+extension ProfileViewController: PostDetailsPushDelegateProtocol {
+    func goToPostDetails(index: IndexPath) {
+        let postDetails = PostDetailsViewController()
+        present(postDetails, animated: true, completion: .none)
+        let view = self.postView.tableView.cellForRow(at: index)
+        postDetails.view = view
+    }
+}
+//delete -->
+extension PhotosViewController: PhotoDetailsProtocol {
+    func goToDetails(){
+        print("Works?")
+        let vc = PhotoDetailsViewController()
+        present(vc, animated: true)
     }
 }
 
@@ -116,7 +141,6 @@ extension PostTableViewCell {
     
     @objc private func likesLabelHandleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         guard self.likesLabelTapGestureRecognizer === gestureRecognizer else { return }
-        tapCount += gestureRecognizer.numberOfTouches
         
         var currentLikes: Int = 0
 
@@ -134,5 +158,13 @@ extension PostTableViewCell {
         let newLikes = currentLikes
         let newText = "Likes: \(newLikes + gestureRecognizer.numberOfTouches)"
         self.likesLabel.text = newText
+    }
+    
+    func viewsUpdate(with number: Int, forIndex: IndexPath){
+        if self.isSelected == false {
+            self.counter += 1
+        }
+        let newText = "Views: \(number + self.counter)"
+        self.viewsLabel.text = newText
     }
 }
