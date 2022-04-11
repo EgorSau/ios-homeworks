@@ -98,7 +98,6 @@ class ProfileHeaderView: UIView {
         self.backgroundColor = .lightGray
         self.setupStackView()
         self.setupStatusButton()
-//        self.setupNextMenuButton()
     }
     
     private func setupStatusButton() {
@@ -128,31 +127,6 @@ class ProfileHeaderView: UIView {
                                     ].compactMap({ $0 }) )
     }
     
-    private func setupNextMenuButton() {
-        
-        self.addSubview(self.nextMenuButton)
-        
-        self.nextMenuButton.backgroundColor = .systemBlue
-        self.nextMenuButton.layer.cornerRadius = 4
-        self.nextMenuButton.setTitle("Next menu", for: .normal)
-        self.nextMenuButton.setTitleColor(.white, for: .normal)
-        self.nextMenuButton.layer.shadowOffset = .init(width: 4, height: 4)
-        self.nextMenuButton.layer.shadowRadius = 4
-        self.nextMenuButton.layer.shadowColor = UIColor.black.cgColor
-        self.nextMenuButton.layer.shadowOpacity = 0.7
-
-        let leadingConstraint = self.nextMenuButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0)
-        let trailingConstraint = self.nextMenuButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
-        let heightConstraint = self.nextMenuButton.heightAnchor.constraint(equalToConstant: 50)
-        let bottomConstraint = self.nextMenuButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
-        
-        NSLayoutConstraint.activate([leadingConstraint,
-                                     trailingConstraint,
-                                     heightConstraint,
-                                     bottomConstraint,
-                                    ].compactMap({ $0 }) )
-    }
-    
     @objc private func buttonPressed() {
         let forPrinting = String(self.statusLabel.text!)
         statusTextChanged(textField)
@@ -161,7 +135,13 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
-        if let text = textField.text {
+        if textField.text == "" {
+            self.statusText = "Waiting for something..."
+            if var text = statusLabel.text {
+                var _ = text
+                text = self.statusText
+            }
+        } else if let text = textField.text {
             self.statusText = text
         }
     }

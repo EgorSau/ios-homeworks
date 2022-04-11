@@ -90,20 +90,14 @@ class LogInViewController: UIViewController {
         self.setupButton()
         self.setupScrollView()
         self.KbdNotificatorAppearance()
-//        Надо добавить во viewDidLoad три строчки
-
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    
-    //        А потом отдельно внутри класса добавить метод
+
     @objc func adjustForKeyboard (notification: Notification){
             if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
                 let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardHeight)
-                self.scrollView.contentOffset = contentOffset // .setContentOffset()
+                self.scrollView.contentOffset = contentOffset
             }
         }
     
@@ -136,7 +130,6 @@ class LogInViewController: UIViewController {
     @objc private func kbdShow(notification: NSNotification) {
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             self.scrollView.contentInset.bottom = kbdSize.height
-//            self.scrollView.contentOffset = CGPoint(x: 0, y: kbdSize.height)
             self.scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSize.height, right: 0)
         }
     }
@@ -238,23 +231,23 @@ class LogInViewController: UIViewController {
     
     @objc private func buttonPressed(){
         //textFields empty?
-//        guard self.emailPhoneTextField.text != "" || self.passTextField.text != "" else {
-//            self.shake()
-//            return
-//        }
+        guard self.emailPhoneTextField.text != "" || self.passTextField.text != "" else {
+            self.shake()
+            return
+        }
 
         //passField correct?
-//        guard self.passTextField.text?.count == 6 else {
-//            self.shake()
-//            self.warningAppear()
-//            return
-//        }
+        guard self.passTextField.text?.count == 6 else {
+            self.shake()
+            self.warningAppear()
+            return
+        }
         
         //log & pass control
-//        guard self.emailPhoneTextField.text == userLogin && self.passTextField.text == userPass else {
-//            self.showAlert()
-//            return
-//        }
+        guard self.emailPhoneTextField.text == userLogin && self.passTextField.text == userPass else {
+            self.showAlert()
+            return
+        }
         
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)

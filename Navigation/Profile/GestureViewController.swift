@@ -55,7 +55,7 @@ class GestureViewController: UIViewController {
 
     private func avatarSetup(){
         self.view.backgroundColor = .white
-        self.navigationItem.title = "Gestures"
+        self.navigationItem.title = "Animation"
         
         self.view.addSubview(avatarImageView)
         

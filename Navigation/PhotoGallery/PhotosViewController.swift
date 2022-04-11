@@ -122,26 +122,23 @@ class PhotosViewController: UIViewController {
                                     ])
     }
     
-    func imageZoom(to: Bool, forCell: IndexPath){
-        if to == true { //non needed
-            
-            let image = self.images[forCell.row]
-            self.imageView.image = UIImage(named: image)
+    func imageZoom(forCell: IndexPath){
+        let image = self.images[forCell.row]
+        self.imageView.image = UIImage(named: image)
 
-            UIView.animate(withDuration: 0.5, delay: 0.0) {
-                
-                
-                self.imageView.isHidden = false
-                self.imageView.alpha = 1
-                self.topConstraint?.isActive = false
-                self.leftConstraint?.isActive = false
-                self.rightConstraint?.isActive = false
-                self.bottomConstraint?.isActive = false
-                
-                self.exitImageView.isHidden = false
-                self.exitImageView.alpha = 1
-                self.view.layoutIfNeeded()
-            }
+        UIView.animate(withDuration: 0.5, delay: 0.0) {
+            
+            
+            self.imageView.isHidden = false
+            self.imageView.alpha = 1
+            self.topConstraint?.isActive = false
+            self.leftConstraint?.isActive = false
+            self.rightConstraint?.isActive = false
+            self.bottomConstraint?.isActive = false
+            
+            self.exitImageView.isHidden = false
+            self.exitImageView.alpha = 1
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -175,9 +172,7 @@ class PhotosViewController: UIViewController {
     
     func setupGesture(){
         self.exitImageView.addGestureRecognizer(self.exitTapGestureRecognizer)
-//        self.photoImageView.addGestureRecognizer(self.imageTapGestureRecognizer)
         self.exitTapGestureRecognizer.addTarget(self, action: #selector(self.exitHandleTapGesture))
-//        self.imageTapGestureRecognizer.addTarget(self, action: #selector(self.imageHandleTapGesture))
     }
     
     @objc private func exitHandleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){

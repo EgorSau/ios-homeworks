@@ -9,8 +9,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    var myTimer: Timer!
-    
     private lazy var headerView: ProfileHeaderView = {
         let view = ProfileHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -35,22 +33,12 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupSubView()
-//        self.timerSetup()
     }
     
     private func setupView(){
         self.view.backgroundColor = .white
         self.navigationItem.title = "Profile"
         self.navigationController?.navigationBar.isHidden = false
-    }
-    
-    func timerSetup(){
-        self.myTimer = Timer(timeInterval: 5.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
-        RunLoop.main.add(self.myTimer, forMode: .default)
-    }
-    
-    @objc func refresh() {
-        self.postView.tableView.reloadData()
     }
     
     private func setupSubView(){
@@ -69,7 +57,6 @@ class ProfileViewController: UIViewController {
         let topPhotoConstraint = self.photoView.view.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
         let leadingPhotoConstraint = self.photoView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let trailingPhotoConstraint = self.photoView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-//        let bottomPhotoConstraint = self.photoView.bottomAnchor.constraint(equalTo: self.tableView.topAnchor)
         let heightPhotoConstraint = self.photoView.view.heightAnchor.constraint(equalToConstant: 150)
         
         //настройка таблицы
@@ -83,7 +70,6 @@ class ProfileViewController: UIViewController {
                                     leadingConstraint,
                                     trailingConstraint,
                                     heightConstraint,
-//                                    bottomPhotoConstraint,
                                     topTableConstraint,
                                     leadingTableConstraint,
                                     trailingTableConstraint,

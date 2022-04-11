@@ -27,20 +27,6 @@ class PhotoTableHeaderView: UIViewController{
         return tableView
     }()
     
-//    var navigation: UINavigationController {
-//        let navigation = UINavigationController(rootViewController: self)
-//        return navigation
-//    }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        self.drawSelf()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.drawSelf()
@@ -52,7 +38,6 @@ class PhotoTableHeaderView: UIViewController{
     
     private func setupTableView() {
         
-//        self.addSubview(self.tableView)
         self.view.addSubview(self.tableView)
         
         let topConstraint = self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor)

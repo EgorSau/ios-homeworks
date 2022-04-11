@@ -46,7 +46,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
 
     func uploadPhotos(for indexPath: IndexPath) -> [String]{
-        // загрузка фото
+        // photo upload
         let model = PhotosTableViewCell()
         model.changeToString()
         model.uploadImages()
@@ -57,7 +57,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     func itemSize(for width: CGFloat, with spacing: CGFloat) -> CGSize {
-        // 3 элемента в ряду
+        // 3 cell in a row
         let neededWidth = width - 4 * spacing
         let itemWidth = floor(neededWidth / Constants.itemCount)
         return CGSize(width: itemWidth, height: itemWidth)

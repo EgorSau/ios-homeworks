@@ -70,7 +70,7 @@ class FeedViewController: UIViewController {
         
         self.firstButton.backgroundColor = .systemBlue
         self.firstButton.layer.cornerRadius = 4
-        self.firstButton.setTitle("#1 Go to Profile", for: .normal)
+        self.firstButton.setTitle("#1 Go to Navigation", for: .normal)
         self.firstButton.setTitleColor(.white, for: .normal)
         self.firstButton.layer.shadowOffset = .init(width: 4, height: 4)
         self.firstButton.layer.shadowRadius = 4
@@ -83,7 +83,7 @@ class FeedViewController: UIViewController {
         
         self.secondButton.backgroundColor = .systemRed
         self.secondButton.layer.cornerRadius = 4
-        self.secondButton.setTitle("#2 Go to gesture view", for: .normal)
+        self.secondButton.setTitle("#2 Go to Animation", for: .normal)
         self.secondButton.setTitleColor(.white, for: .normal)
         self.secondButton.layer.shadowOffset = .init(width: 4, height: 4)
         self.secondButton.layer.shadowRadius = 4

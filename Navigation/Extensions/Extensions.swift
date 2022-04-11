@@ -103,8 +103,8 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? PhotosCollectionViewCell else {return}
-        self.imageZoom(to: cell.isSelected, forCell: indexPath)
+        guard let _ = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? PhotosCollectionViewCell else {return}
+        self.imageZoom(forCell: indexPath)
     }
 }
 
@@ -121,14 +121,6 @@ extension ProfileViewController: PostDetailsPushDelegateProtocol {
         present(postDetails, animated: true, completion: .none)
         let view = self.postView.tableView.cellForRow(at: index)
         postDetails.view = view
-    }
-}
-//delete -->
-extension PhotosViewController: PhotoDetailsProtocol {
-    func goToDetails(){
-        print("Works?")
-        let vc = PhotoDetailsViewController()
-        present(vc, animated: true)
     }
 }
 

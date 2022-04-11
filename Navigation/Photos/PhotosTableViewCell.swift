@@ -65,18 +65,9 @@ class PhotosTableViewCell: UITableViewCell {
         return arrowImage
     }()
     
-//    lazy var arrowButton: UIButton = {
-//        let button = UIButton()
-//        button.setBackgroundImage(self.arrowImage.image, for: .normal)
-//        button.tintColor = .black
-//        button.addTarget(self, action: #selector(self.goToPhotoCollection), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
-    
     lazy var photoImage1: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -86,7 +77,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage2: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -96,7 +87,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage3: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -106,7 +97,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     lazy var photoImage4: UIImageView = {
         let photoImage = UIImageView()
-        photoImage.contentMode = .scaleAspectFill //width = height = (screen width - all offsets)/4
+        photoImage.contentMode = .scaleAspectFill
         photoImage.clipsToBounds = true
         photoImage.layer.cornerRadius = 6
         photoImage.backgroundColor = .gray
@@ -142,8 +133,7 @@ class PhotosTableViewCell: UITableViewCell {
         self.mainStack.addArrangedSubview(firstLineStack)
         self.mainStack.addArrangedSubview(photoStack)
         self.firstLineStack.addArrangedSubview(titleLabel)
-//        self.firstLineStack.addArrangedSubview(arrowButton) // button
-        self.firstLineStack.addArrangedSubview(arrowImage) // image
+        self.firstLineStack.addArrangedSubview(arrowImage)
         self.photoStack.addArrangedSubview(photoImage1)
         self.photoStack.addArrangedSubview(photoImage2)
         self.photoStack.addArrangedSubview(photoImage3)
@@ -160,14 +150,12 @@ class PhotosTableViewCell: UITableViewCell {
         let leadingConstraint = self.mainStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 12)
         let trailingConstraint = self.mainStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -12)
         let bottomConstraint = self.mainStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
-        //, constant: 12)
         
         //title
         let bottomTitleConstraint = self.titleLabel.bottomAnchor.constraint(equalTo: photoStack.topAnchor, constant: -12)
         
         //arrow
-//        let centerY = self.arrowButton.centerYAnchor.constraint(equalTo: self.arrowButton.centerYAnchor) //button
-        let centerY = self.arrowImage.centerYAnchor.constraint(equalTo: self.arrowImage.centerYAnchor) //image
+        let centerY = self.arrowImage.centerYAnchor.constraint(equalTo: self.arrowImage.centerYAnchor)
         
         //images
         let image1ViewAspectRatio = self.photoImage1.heightAnchor.constraint(equalTo: self.photoImage1.widthAnchor, multiplier: 1.0)
