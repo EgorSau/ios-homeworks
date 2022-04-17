@@ -57,7 +57,6 @@ class ProfileHeaderView: UIView {
         var profile = UIImageView()
         let catImage = UIImage(named: "coolCat.jpg")
         profile.image = catImage
-//        profile.layer.cornerRadius = 85
         profile.layer.borderWidth = 3
         profile.layer.borderColor = UIColor.white.cgColor
         profile.layer.masksToBounds = true
@@ -69,7 +68,7 @@ class ProfileHeaderView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 16
-        stack.distribution = .fillEqually
+        stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -111,7 +110,6 @@ class ProfileHeaderView: UIView {
         self.backgroundColor = .lightGray
         self.setupStackView()
         self.setupStatusButton()
-//        self.setupNextMenuButton()
     }
     
     private func setupStatusButton() {
@@ -171,20 +169,8 @@ class ProfileHeaderView: UIView {
     @objc private func buttonPressed() {
         self.statusTextChanged(textField)
         self.profileViewUpdate(stackHeight: self.height, { () in
-//            [weak self]
-//            if self?.height == 270 {
-//                self?.height = 190
-//                guard let height = self?.height else {return}
-//                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
-//            } else {
-//                self?.height = 270
-//                guard let height = self?.height else {return}
-//                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
-//            }
         })
         layoutSubviews()
-
-//        self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
 
         let forPrinting = String(self.statusLabel.text!)
         self.statusLabel.text = self.statusText
@@ -216,6 +202,7 @@ class ProfileHeaderView: UIView {
         }
         self.stackHeightConstraint?.isActive = false
         self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: constraint)
+
         NSLayoutConstraint.activate([
             self.stackHeightConstraint
         ].compactMap({ $0 }) )
@@ -244,7 +231,7 @@ class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([topConstraint,
                                      leadingConstraint,
                                      trailingConstraint,
-                                     imageViewAspectRatio,
+                                     imageViewAspectRatio
                                     ])
     }
 }
