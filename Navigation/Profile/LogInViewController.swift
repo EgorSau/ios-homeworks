@@ -9,8 +9,11 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    let tapGesture = UITapGestureRecognizer()
+    
     lazy var scrollView: UIScrollView = {
         var scrollView = UIScrollView()
+        scrollView.isUserInteractionEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -83,11 +86,17 @@ class LogInViewController: UIViewController {
         self.setupStack()
         self.setupButton()
         self.KbdNotificatorAppearance()
+        self.setupGesture()
     }
     
     deinit {
         self.KbdNotificatorRemove()
     }
+    
+    private func setupGesture(){
+         self.scrollView.addGestureRecognizer(self.tapGesture)
+         self.tapGesture.addTarget(self, action: #selector(self.tapForKbd))
+     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -112,6 +121,12 @@ class LogInViewController: UIViewController {
             self.scrollView.contentOffset = CGPoint(x: 0, y: kbdSize.height/2)
             self.scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0, bottom: kbdSize.height, right: 0)
         }
+    }
+    
+    @objc func tapForKbd (_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapGesture === gestureRecognizer else { return }
+        self.passTextField.resignFirstResponder()
+        self.emailPhoneTextField.resignFirstResponder()
     }
     
     @objc private func kbdHide(notification: NSNotification) {

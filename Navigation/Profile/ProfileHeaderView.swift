@@ -168,10 +168,7 @@ class ProfileHeaderView: UIView {
     
     @objc private func buttonPressed() {
         self.statusTextChanged(textField)
-        self.profileViewUpdate(stackHeight: self.height, { () in
-        })
-        layoutSubviews()
-
+        self.profileViewUpdate(stackHeight: self.height, completion: nil)
         let forPrinting = String(self.statusLabel.text!)
         self.statusLabel.text = self.statusText
         print(forPrinting)
@@ -189,7 +186,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    private func profileViewUpdate(stackHeight: CGFloat, _ completion: @escaping () -> Void){
+    private func profileViewUpdate(stackHeight: CGFloat, completion: (() -> Void)?){
         var constraint: CGFloat = 0
         if stackHeight == 270 {
             constraint = 100
@@ -206,10 +203,11 @@ class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([
             self.stackHeightConstraint
         ].compactMap({ $0 }) )
-        self.stackView.distribution = .fillProportionally
+        self.textField.isHidden.toggle()
         UIView.animate(withDuration: 0.3, delay: 0.0) {
             self.layoutIfNeeded()
         } completion: { _ in
+            guard let completion = completion else { return }
             completion()
         }
 
