@@ -15,8 +15,7 @@ protocol Setupable {
 
 extension ProfileTableHeaderView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let view = ProfileTableHeaderView()
-        let count = view.dataSource.count
+        let count = self.dataSource.count
         return count
     }
     

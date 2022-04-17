@@ -170,16 +170,17 @@ class ProfileHeaderView: UIView {
     
     @objc private func buttonPressed() {
         self.statusTextChanged(textField)
-        self.profileViewUpdate(stackHeight: self.height, { [weak self] in
-            if self?.height == 270 {
-                self?.height = 190
-                guard let height = self?.height else {return}
-                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
-            } else {
-                self?.height = 270
-                guard let height = self?.height else {return}
-                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
-            }
+        self.profileViewUpdate(stackHeight: self.height, { () in
+//            [weak self]
+//            if self?.height == 270 {
+//                self?.height = 190
+//                guard let height = self?.height else {return}
+//                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
+//            } else {
+//                self?.height = 270
+//                guard let height = self?.height else {return}
+//                self?.viewDelegate?.tableHeightUpdate(newHeight: height)
+//            }
         })
         layoutSubviews()
 
@@ -206,8 +207,12 @@ class ProfileHeaderView: UIView {
         var constraint: CGFloat = 0
         if stackHeight == 270 {
             constraint = 100
+            self.height = 190
+            self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
         } else if stackHeight == 190 {
             constraint = 170
+            self.height = 270
+            self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
         }
         self.stackHeightConstraint?.isActive = false
         self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: constraint)
