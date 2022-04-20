@@ -187,24 +187,24 @@ class ProfileHeaderView: UIView {
     }
     
     private func profileViewUpdate(stackHeight: CGFloat, completion: (() -> Void)?){
-        var constraint: CGFloat = 0
-        if stackHeight == 270 {
-            constraint = 100
-            self.height = 190
-            self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
-        } else if stackHeight == 190 {
-            constraint = 170
-            self.height = 270
-            self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
-        }
-        self.stackHeightConstraint?.isActive = false
-        self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: constraint)
-
-        NSLayoutConstraint.activate([
-            self.stackHeightConstraint
-        ].compactMap({ $0 }) )
-        self.textField.isHidden.toggle()
         UIView.animate(withDuration: 0.3, delay: 0.0) {
+            var constraint: CGFloat = 0
+            if stackHeight == 270 {
+                constraint = 100
+                self.height = 190
+                self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
+            } else if stackHeight == 190 {
+                constraint = 170
+                self.height = 270
+                self.viewDelegate?.tableHeightUpdate(newHeight: self.height)
+            }
+            self.stackHeightConstraint?.isActive = false
+            self.stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: constraint)
+            
+            NSLayoutConstraint.activate([
+                self.stackHeightConstraint
+            ].compactMap({ $0 }) )
+            self.textField.isHidden.toggle()
             self.layoutIfNeeded()
         } completion: { _ in
             guard let completion = completion else { return }

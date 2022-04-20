@@ -65,10 +65,10 @@ class ProfileTableHeaderView: UIView {
 extension ProfileTableHeaderView: ProfileViewDelegateProtocol {
     
     func tableHeightUpdate(newHeight: CGFloat) {
-        self.tableView.beginUpdates()
-        self.height = newHeight
-        self.tableView.endUpdates()
         UIView.animate(withDuration: 0.3, delay: 0.0) {
+            self.tableView.beginUpdates()
+            self.height = newHeight
+            self.tableView.endUpdates()
             self.layoutIfNeeded()
         }
     }
