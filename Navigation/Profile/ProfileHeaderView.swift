@@ -131,6 +131,12 @@ class ProfileHeaderView: UIView {
         let forPrinting = String(self.statusLabel.text!)
         statusTextChanged(textField)
         self.statusLabel.text = self.statusText
+        if self.textField.text?.isEmpty == true {
+            self.textField.layer.borderColor = UIColor.red.cgColor
+            self.shake()
+        } else {
+            self.textField.layer.borderColor = UIColor.black.cgColor
+        }
         print(forPrinting)
     }
     
@@ -164,5 +170,21 @@ class ProfileHeaderView: UIView {
                                      trailingConstraint,
                                      imageViewAspectRatio,
                                     ])
+    }
+}
+
+protocol ProfileAnimated {
+    func shake()
+}
+
+extension ProfileHeaderView: ProfileAnimated {
+    func shake() {
+        let animation = CAKeyframeAnimation()
+        animation.keyPath = "position.x"
+        animation.values = [0, 10, -10, 10, 0]
+        animation.keyTimes = [0, 0.16, 0.5, 0.83, 1]
+        animation.duration = 0.4
+        animation.isAdditive = true
+        self.textField.layer.add(animation, forKey: "shake")
     }
 }

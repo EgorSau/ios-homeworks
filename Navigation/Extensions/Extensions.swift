@@ -118,9 +118,10 @@ extension ProfileViewController: GalleryPushDelegateProtocol {
 extension ProfileViewController: PostDetailsPushDelegateProtocol {
     func goToPostDetails(index: IndexPath) {
         let postDetails = PostDetailsViewController()
-        present(postDetails, animated: true, completion: .none)
+        postDetails.delegate = self
         let view = self.postView.tableView.cellForRow(at: index)
         postDetails.view = view
+        present(postDetails, animated: true, completion: .none)
     }
 }
 
