@@ -16,11 +16,11 @@
 		204721ED27F37A30008082DE /* GestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204721EC27F37A30008082DE /* GestureViewController.swift */; };
 		2049FA7327C2B61D009288D7 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049FA7227C2B61D009288D7 /* ProfileHeaderView.swift */; };
 		2049FA7527C2B655009288D7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049FA7427C2B655009288D7 /* ProfileViewController.swift */; };
+		205A5782283EA65C00B2368F /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A5781283EA65C00B2368F /* CustomHeaderView.swift */; };
 		206C6BC427DBD670005F6C33 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C6BC327DBD670005F6C33 /* ProfileTableHeaderView.swift */; };
 		206C6BC627DBD88D005F6C33 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C6BC527DBD88D005F6C33 /* Extensions.swift */; };
 		206C6BC927DCA27C005F6C33 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C6BC827DCA27C005F6C33 /* PostTableViewCell.swift */; };
 		207B0FF927D91B9700955EB1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207B0FF827D91B9700955EB1 /* Post.swift */; };
-		2091F81627E29D7F00BBA861 /* PhotoTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091F81527E29D7F00BBA861 /* PhotoTableHeaderView.swift */; };
 		2092EA7727B5AF73000CE37D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2092EA7627B5AF73000CE37D /* FeedViewController.swift */; };
 		20940A4827CD38220021AE05 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20940A4727CD38220021AE05 /* FeedView.swift */; };
 		20940A4B27CD466D0021AE05 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20940A4A27CD466D0021AE05 /* LogInViewController.swift */; };
@@ -42,11 +42,11 @@
 		204721EC27F37A30008082DE /* GestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureViewController.swift; sourceTree = "<group>"; };
 		2049FA7227C2B61D009288D7 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		2049FA7427C2B655009288D7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		205A5781283EA65C00B2368F /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		206C6BC327DBD670005F6C33 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		206C6BC527DBD88D005F6C33 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		206C6BC827DCA27C005F6C33 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		207B0FF827D91B9700955EB1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		2091F81527E29D7F00BBA861 /* PhotoTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableHeaderView.swift; sourceTree = "<group>"; };
 		2092EA7627B5AF73000CE37D /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		20940A4727CD38220021AE05 /* FeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		20940A4A27CD466D0021AE05 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +125,7 @@
 				2049FA7427C2B655009288D7 /* ProfileViewController.swift */,
 				2049FA7227C2B61D009288D7 /* ProfileHeaderView.swift */,
 				204721EC27F37A30008082DE /* GestureViewController.swift */,
+				205A5781283EA65C00B2368F /* CustomHeaderView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,7 +176,6 @@
 		20C7F9CF27E03ACB005A76EE /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				2091F81527E29D7F00BBA861 /* PhotoTableHeaderView.swift */,
 				20C7F9D027E03AFB005A76EE /* PhotosTableViewCell.swift */,
 			);
 			path = Photos;
@@ -262,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20940A4827CD38220021AE05 /* FeedView.swift in Sources */,
+				205A5782283EA65C00B2368F /* CustomHeaderView.swift in Sources */,
 				206C6BC427DBD670005F6C33 /* ProfileTableHeaderView.swift in Sources */,
 				206C6BC927DCA27C005F6C33 /* PostTableViewCell.swift in Sources */,
 				20C7F9D127E03AFB005A76EE /* PhotosTableViewCell.swift in Sources */,
@@ -273,7 +274,6 @@
 				20C20C0727E3AB1E00FE5F89 /* PhotosViewController.swift in Sources */,
 				20B5FB8A27BAAD5A004A947D /* TabBarController.swift in Sources */,
 				20101D2927BC121800C96925 /* InfoVC.swift in Sources */,
-				2091F81627E29D7F00BBA861 /* PhotoTableHeaderView.swift in Sources */,
 				201DA2DB27B019A8009F5070 /* AppDelegate.swift in Sources */,
 				2049FA7527C2B655009288D7 /* ProfileViewController.swift in Sources */,
 				201DA2DD27B019A8009F5070 /* SceneDelegate.swift in Sources */,

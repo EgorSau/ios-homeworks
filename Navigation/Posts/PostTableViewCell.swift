@@ -20,7 +20,6 @@ class PostTableViewCell: UITableViewCell {
     }
     
     var views: Int = 0
-    var counter: Int = 0
     
     private lazy var backView: UIView = {
        let backView = UIView()
